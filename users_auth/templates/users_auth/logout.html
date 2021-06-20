@@ -1,0 +1,15 @@
+{% extends "comportal/index.html" %}
+{% block content %}
+    <h2>You have been logged out</h2>
+    <div class="row">
+        <div class="box box-primary">
+            <div class="box-body">
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        <a href="{% url 'login' %}">Log In Again</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

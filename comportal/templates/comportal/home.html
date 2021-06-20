@@ -1,0 +1,40 @@
+{% extends "comportal/index.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <strong class="text-maroon text-capitalize">
+                    <i class="fa fa-sticky-note-o"></i>
+                    One platform where you can lodge your grievances for quick redress
+                </strong>
+            </div>
+            <div class="box-body">
+                <p class="text-justify">
+                    Student Grievance Redress And Monitoring System (NITWGRAMS) is an
+                    online web-enabled system , in association with
+                    WSDC. NITWGRAMS is the platform based on web
+                    technology which primarily aims to enable submission of grievances by the
+                    aggrieved students from anywhere and anytime (24x7) basis to
+                    concerned department who scrutinize and take action for speedy
+                    and favorable redress of these grievances. Tracking grievances is also facilitated
+                    on this portal.
+                </p>
+            </div>
+        </div>
+    </div>
+    {% if user.is_authenticated%}
+    {% else %}
+        <div class="row">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <strong class="text-maroon text-capitalize">
+                        <p class="col-md-12 text-justify text-warning">
+                            <strong>Note :</strong> Students have to login for registering or monitoring their Grievance.
+                        </p>
+                    </strong>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends "comportal/index.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row">
+        <div class="box box-primary">
+            <div class="box-body">
+                <div class="col-md-12 content-section">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">Complain</legend>
+                            {{ form|crispy }}
+                        </fieldset>
+                        {{ formset.management_form }}
+                        {% for form in formset %}
+                            {{ form.as_p }}
+                        {% endfor %}
+                        <div class="form-group">
+                            <button class="btn btn-outline-info" type="submit">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

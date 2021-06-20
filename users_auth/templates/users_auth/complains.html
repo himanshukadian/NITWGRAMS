@@ -1,0 +1,83 @@
+{% extends "comportal/index.html" %}
+{% block content %}
+    <div class="row">
+        <div class="box box-primary">
+            <div class="box-body">
+                <div class="row">
+                    {% if user.admin == 'N'%}
+                        <div class="col-md-6">
+                            {% if complain_list %}
+                                <ul>
+                                    {% for complain in complain_list %}
+                                        <div style="border:3px solid grey; border-radius:5px;">
+                                        <div class="media" >
+                                            <div class="media-left media-top">
+                                                <a href="#">
+                                                    <img class="rounded-circle" src="{{ complain.by.image.url }}" style= "width: 100px; height: 100px;">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="{% url 'comportal:detail' complain.id %}">{{ complain.title|title }}</a></h4>
+                                                <small >author : {{ complain.by }}</small><br>
+                                                <small class="text-muted">date : {{ complain.pub_date|date:"F d, Y" }}</small><br>
+                                                {% if  complain.status == 0 %}
+                                                    <button class="btn-primary">No action yet taken</button>
+                                                {% elif complain.status == 1 %}
+                                                    <button class="btn-success">In process</button>
+                                                {% else %}
+                                                    <button class="btn-primary">Complain resolved</button>
+                                                {% endif %}
+                                                <p>description : {{ complain.description }}</p>
+                                                <p><img class="rounded-circle" src="{{ complain.pimage.url }}" style= "width: 100px; height: 100px;"></p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <hr>
+                                        <div>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <h3> no complains </h3>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% if user.admin == 'N'%}
+                        <div class="col-md-6">
+                    {% else %}
+                        <div class="col-md-12">
+                    {% endif %}
+                    <div style="border:3px solid grey; border-radius:5px;">
+                        <div class="content-section">
+                            <h3>Profile</h3>
+                            <img class="rounded-circle" src="{{ user.image.url }}" style= "width: 300px; height: 300px;">
+                            <p class='text-muted'>
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-light">
+                                    Name: {{user.name}}
+                                </li>
+                                <li class="list-group-item list-group-item-light">
+                                    Email: {{user.email}}
+                                </li>
+                                <li class="list-group-item list-group-item-light">
+                                    Mobile: {{user.mobile}}
+                                </li>
+                                <li class="list-group-item list-group-item-light">
+                                    Registration number: {{user.registration_number}}
+                                </li>
+                                {% if allow %}
+                                    <li  class="list-group-item list-group-item-light">
+                                        <a style="width: fit-content" class="btn btn-md bg-blue-active btn-social btn-block" href="{% url 'users_auth:update-profile' user.id %}" >
+                                            <i class="fa fa-user"></i>
+                                            Update Profile
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                            </p>
+                        </div>
+                    </div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
